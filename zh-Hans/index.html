@@ -1,380 +1,175 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LearnNest 学习管理 — 课程表 · 作业 · 习惯 · 专注 · 积分奖励</title>
-<meta name="description" content="LearnNest 是为家长设计的学习管理 App：课程表、作业、习惯打卡、专注计时、积分奖励。隐私优先——数据只存在你自己的 iCloud。免费试用 7 天，一次性买断，无订阅。">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnNest — 习惯、课程表和作业，由孩子自己主导</title>
+<meta name="description" content="LearnNest 帮孩子管理自己的一天——习惯打卡、课程表、作业、积分奖励，一个 App 搞定。无需注册、无广告、无订阅，一次买断，支持家庭共享。">
 <link rel="canonical" href="https://learnnest.cn/zh-Hans/">
 <link rel="alternate" hreflang="en" href="https://learnnest.cn/">
 <link rel="alternate" hreflang="zh-Hans" href="https://learnnest.cn/zh-Hans/">
-<link rel="alternate" hreflang="x-default" href="https://learnnest.cn/">
-<meta property="og:title" content="LearnNest — 每个家庭的学习搭子">
-<meta property="og:description" content="课程表、作业、习惯、专注、积分奖励——为全家设计的学习管理 App。隐私优先，免费试用 7 天，一次性买断。">
-<meta property="og:image" content="https://learnnest.cn/assets/appicon.png">
+<meta property="og:title" content="LearnNest — 每一天，井井有条。">
+<meta property="og:description" content="习惯、课程表、作业和奖励——由孩子自己主导，不用家长盯。">
+<meta property="og:image" content="https://learnnest.cn/assets/promo_poster.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="../assets/appicon.png">
 <style>
-:root{--orange:#ff8f3e;--orange-deep:#e9741f;--ink:#3d2e21;--sub:#8a7a68;--line:#efe6da;--bg:#faf7f2;--card:#ffffff;--teal:#2a9d8f}
+:root{
+  --ink:#1d1d1f; --gray:#6e6e73; --bg-alt:#f5f5f7; --accent:#ff8f3e; --accent-dark:#e67a26;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
-a{color:var(--orange-deep);text-decoration:none}
-.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
-header{position:sticky;top:0;background:rgba(250,247,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:10}
-header .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px}
-.brand img{width:30px;height:30px;border-radius:8px}
-nav.top{display:flex;gap:20px;font-size:14px}
-nav.top a{color:var(--sub)}
-nav.top a:hover{color:var(--ink)}
-.langswitch{font-size:13.5px;border:1px solid var(--line);border-radius:999px;padding:5px 14px;background:#fff;color:var(--sub)}
-.hero{text-align:center;padding:72px 0 44px;background:linear-gradient(180deg,#fff6ec 0%,var(--bg) 100%)}
-.hero .appicon{width:96px;height:96px;border-radius:22px;box-shadow:0 10px 26px rgba(233,116,31,.25)}
-.hero h1{font-size:36px;line-height:1.25;letter-spacing:.2px;margin-top:22px}
-.hero p.sub{color:var(--sub);font-size:18.5px;margin:14px auto 8px;max-width:660px}
-.badges{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 15px;font-size:13px;color:var(--sub)}
-.cta-row{margin-top:26px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;font-size:16px;padding:13px 28px;border-radius:13px;box-shadow:0 6px 18px rgba(255,143,62,.35)}
-.cta:hover{background:var(--orange-deep)}
-.cta.ghost{background:transparent;color:var(--orange-deep);border:1.5px solid var(--orange);box-shadow:none}
-.cta.ghost:hover{background:#fff4e8}
-.trialnote{color:var(--sub);font-size:13px;margin-top:12px}
-.shots-hero{margin-top:48px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-.shot{width:228px;background:#fff;border:1px solid var(--line);border-radius:26px;padding:8px;box-shadow:0 14px 34px rgba(61,46,33,.10)}
-.shot img{width:100%;border-radius:19px;display:block}
-.videobox{margin:44px auto 0;max-width:340px}
-.videobox video{width:100%;border-radius:24px;border:1px solid var(--line);box-shadow:0 14px 34px rgba(61,46,33,.12);display:block}
-.videobox p{font-size:12.5px;color:var(--sub);margin-top:8px}
-section{padding:58px 0}
-section h2{font-size:27px;text-align:center}
-section p.lead{color:var(--sub);text-align:center;margin:8px auto 32px;max-width:620px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
-.feat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;gap:16px;align-items:flex-start}
-.feat img{width:118px;border-radius:14px;border:1px solid var(--line);flex:none}
-.feat h3{font-size:16px;margin-bottom:4px}
-.feat p{font-size:14px;color:var(--sub)}
-.band{background:linear-gradient(180deg,#fff2e3,#ffe8d2)}
-.hlgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.hl{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px}
-.hl h3{font-size:15.5px;margin-bottom:4px}
-.hl p{font-size:14px;color:var(--sub)}
-/* how it works */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:920px;margin:0 auto}
-.step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;text-align:center}
-.step .num{display:inline-flex;width:44px;height:44px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;font-size:20px;align-items:center;justify-content:center;margin-bottom:12px}
-.step h3{font-size:16.5px;margin-bottom:6px}
-.step p{font-size:14px;color:var(--sub)}
-.step .icon{font-size:30px;display:block;margin-bottom:8px}
-/* journey rows */
-.jrow{display:flex;gap:34px;align-items:center;max-width:900px;margin:0 auto 42px}
-.jrow:last-child{margin-bottom:0}
-.jrow.rev{flex-direction:row-reverse}
-.jrow img{width:300px;border-radius:24px;border:1px solid var(--line);box-shadow:0 14px 34px rgba(61,46,33,.10);flex:none}
-.jrow .time{font-size:13px;font-weight:700;color:var(--orange-deep);letter-spacing:.6px}
-.jrow h3{font-size:20px;margin:6px 0 8px}
-.jrow p{font-size:15px;color:var(--sub)}
-/* who it's for */
-.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.who{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
-.who .icon{font-size:32px;display:block;margin-bottom:8px}
-.who h3{font-size:15.5px;margin-bottom:6px}
-.who p{font-size:14px;color:var(--sub)}
-/* compare table */
-.cmp{max-width:780px;margin:0 auto;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
-.cmp table{width:100%;border-collapse:collapse;font-size:14px}
-.cmp th{background:#fff4e8;padding:13px 14px;text-align:left;font-size:13.5px}
-.cmp th.hlcol{color:var(--orange-deep)}
-.cmp td{padding:12px 14px;border-top:1px solid var(--line);color:var(--sub);vertical-align:top}
-.cmp td:first-child{color:var(--ink);font-weight:600;width:172px}
-.cmp .yes{color:var(--teal);font-weight:700}
-.cmp .no{color:#c05a3a}
-/* founder */
-.founder{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:34px 38px;display:flex;gap:26px;align-items:flex-start}
-.founder img{width:64px;height:64px;border-radius:16px;flex:none;box-shadow:0 8px 20px rgba(233,116,31,.2)}
-.founder p{font-size:15px;color:var(--sub)}
-.founder p.sig{margin-top:10px;color:var(--ink);font-weight:600;font-size:14.5px}
-/* final cta */
-.finalcta{text-align:center;background:linear-gradient(180deg,#fff2e3,#ffe8d2);padding:64px 0}
-.finalcta h2{font-size:29px}
-.finalcta p{color:var(--sub);margin:10px auto 26px;max-width:520px}
-/* pricing */
-.price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;max-width:820px;margin:0 auto}
-.price-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;text-align:center}
-.price-card.hot{border:2px solid var(--orange);position:relative}
-.price-card .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:3px 14px;border-radius:12px;white-space:nowrap}
-.price-card h3{font-size:18px}
-.price-card .big{font-size:30px;font-weight:800;margin:10px 0 2px}
-.price-card .fine{font-size:13px;color:var(--sub)}
-.price-card ul{list-style:none;margin:16px 0 0;text-align:left}
-.price-card li{font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)}
-.price-card li:last-child{border-bottom:none}
-.price-card li::before{content:"✓";color:var(--teal);font-weight:700;margin-right:8px}
-/* changelog */
-.log{max-width:760px;margin:0 auto}
-.log .ver{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:14px}
-.log .ver h3{font-size:16px;display:flex;align-items:center;gap:10px}
-.log .ver .latest{background:var(--orange);color:#fff;font-size:11.5px;font-weight:700;border-radius:10px;padding:2px 10px}
-.log .ver ul{margin:10px 0 0 18px}
-.log .ver li{font-size:14px;color:var(--sub);padding:3px 0}
-/* faq */
-dl.faq{max-width:780px;margin:0 auto}
-details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 20px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600;font-size:15px;padding:15px 0;list-style:none}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Hiragino Sans GB",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.5}
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;max-width:1024px;margin:0 auto;padding:14px 24px;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(20px)}
+.nav .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:19px;text-decoration:none;color:var(--ink)}
+.nav .brand img{width:30px;height:30px;border-radius:7px}
+.nav .right{display:flex;align-items:center;gap:22px}
+.nav a.link{color:var(--gray);font-size:14px;text-decoration:none}
+.nav a.link:hover{color:var(--ink)}
+.pill{display:inline-block;background:var(--accent);color:#fff;font-size:14px;font-weight:500;padding:7px 18px;border-radius:999px;text-decoration:none}
+.pill:hover{background:var(--accent-dark)}
+section{max-width:860px;margin:0 auto;padding:110px 24px;text-align:center}
+h1{font-size:clamp(44px,7vw,80px);font-weight:700;letter-spacing:-.015em;line-height:1.06}
+h2{font-size:clamp(34px,5vw,56px);font-weight:700;letter-spacing:-.012em;line-height:1.1}
+.sub{font-size:clamp(19px,2.4vw,24px);color:var(--gray);margin-top:18px;font-weight:400}
+.small-note{font-size:13px;color:#a1a1a6;margin-top:14px}
+.cta-row{margin-top:34px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.btn{background:var(--accent);color:#fff;font-size:18px;font-weight:500;padding:15px 34px;border-radius:999px;text-decoration:none}
+.btn:hover{background:var(--accent-dark)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:14px 33px}
+.btn.ghost:hover{background:#fff7f0}
+.hero-shot{width:100%;max-width:820px;margin:56px auto 0;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.16);display:block}
+.alt{background:var(--bg-alt);max-width:none}
+.alt>div{max-width:860px;margin:0 auto;padding:110px 24px;text-align:center}
+.dark{background:#000;color:#f5f5f7;max-width:none}
+.dark>div{max-width:860px;margin:0 auto;padding:130px 24px;text-align:center}
+.dark h2{color:#f5f5f7}
+.dark .sub{color:#a1a1a6}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:56px 40px;margin-top:64px;text-align:center}
+.grid .item .emoji{font-size:40px;display:block;margin-bottom:14px}
+.grid .item h3{font-size:21px;font-weight:600;margin-bottom:6px}
+.grid .item p{font-size:15px;color:var(--gray)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px;text-align:center}
+.steps .num{font-size:15px;font-weight:600;color:var(--accent);letter-spacing:.06em}
+.steps h3{font-size:22px;font-weight:600;margin:8px 0 6px}
+.steps p{font-size:15px;color:var(--gray)}
+.day{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
+.day figure img{width:100%;border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,.12);display:block}
+.day figcaption{font-size:14px;color:var(--gray);margin-top:12px}
+blockquote{font-size:clamp(24px,3.4vw,34px);font-weight:600;line-height:1.3;letter-spacing:-.01em;max-width:760px;margin:0 auto}
+blockquote footer{font-size:16px;font-weight:400;color:var(--gray);margin-top:22px}
+details{max-width:680px;margin:0 auto;text-align:left;border-bottom:1px solid #e5e5ea}
+details:first-of-type{border-top:1px solid #e5e5ea}
+summary{list-style:none;cursor:pointer;font-size:18px;font-weight:500;padding:20px 8px;display:flex;justify-content:space-between;align-items:center}
 summary::-webkit-details-marker{display:none}
-details p{color:var(--sub);font-size:14.5px;padding:0 0 16px}
-footer{border-top:1px solid var(--line);padding:34px 0 46px;color:var(--sub);font-size:13.5px}
-footer .cols{display:flex;gap:44px;flex-wrap:wrap;margin-bottom:22px}
-footer .cols h4{font-size:13px;color:var(--ink);margin-bottom:8px}
-footer .cols a{display:block;color:var(--sub);padding:2.5px 0}
-footer .cols a:hover{color:var(--orange-deep)}
-@media (max-width:760px){.jrow,.jrow.rev{flex-direction:column;text-align:left}.jrow img{width:min(300px,86%)}}
-@media (max-width:640px){.hero h1{font-size:27px}.hero p.sub{font-size:16px}.feat{flex-direction:column}.feat img{width:100%}nav.top{display:none}.founder{flex-direction:column}.cmp td:first-child{width:auto}}
+summary::after{content:"+";font-size:24px;color:var(--gray);font-weight:400;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{font-size:15px;color:var(--gray);padding:0 8px 22px;line-height:1.6}
+footer.site{border-top:1px solid #e5e5ea;padding:34px 24px 48px;font-size:12px;color:#a1a1a6}
+footer.site .inner{max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;align-items:center}
+footer.site a{color:#6e6e73;text-decoration:none}
+footer.site a:hover{color:var(--ink)}
+@media(max-width:720px){
+  section,.alt>div,.dark>div{padding:80px 20px}
+  .grid,.steps{grid-template-columns:1fr;gap:36px}
+  .day{grid-template-columns:1fr;gap:34px}
+  .nav a.link.lang{display:none}
+}
 </style>
 </head>
 <body>
 
-<header><div class="wrap">
-  <div class="brand"><img src="../assets/appicon.png" alt="LearnNest 图标">LearnNest</div>
-  <nav class="top">
-    <a href="#how">怎么用</a><a href="#features">功能</a><a href="#who">谁适合用</a><a href="#pricing">价格</a><a href="#faq">常见问题</a>
-  </nav>
-  <a class="langswitch" href="../">English</a>
-</div></header>
+<nav class="nav">
+  <a class="brand" href="/zh-Hans/"><img src="../assets/appicon.png" alt="LearnNest">LearnNest</a>
+  <div class="right">
+    <a class="link lang" href="/">English</a>
+    <a class="pill" href="#download">下载 App</a>
+  </div>
+</nav>
 
-<div class="hero"><div class="wrap">
-  <img class="appicon" src="../assets/appicon.png" alt="LearnNest 图标">
-  <h1>每个上学日，<br>都井井有条</h1>
-  <p class="sub">课程表 · 作业 · 习惯打卡 · 专注计时 · 积分奖励——为全家设计的学习管理 App。</p>
-  <div class="badges">
-    <span class="pill">🎁 免费试用 7 天</span>
-    <span class="pill">💳 一次性买断 · 无订阅</span>
-    <span class="pill">🔒 隐私优先——只存你自己的 iCloud</span>
-    <span class="pill">🌍 22 种语言</span>
-  </div>
+<!-- Hero -->
+<section>
+  <h1>每一天，<br>井井有条。</h1>
+  <p class="sub">习惯、课程表、作业和奖励——<br>由孩子自己主导，不用家长盯。</p>
   <div class="cta-row">
-    <!-- TODO(deploy): 替换为 ASC 实际 App 页 URL -->
-    <a class="cta" href="https://apps.apple.com/">App Store 立即下载</a>
-    <a class="cta ghost" href="#how">看看怎么用</a>
+    <a class="btn" href="#download">App Store 下载</a>
+    <a class="btn ghost" href="#how">了解使用方法</a>
   </div>
-  <p class="trialnote">7 天全功能免费试用——无需注册，无需绑卡。</p>
-  <div class="shots-hero">
-    <div class="shot"><img src="../assets/zh-Hans/01_today.jpg" alt="今日一览"></div>
-    <div class="shot"><img src="../assets/zh-Hans/02_timetable.jpg" alt="课程表"></div>
-    <div class="shot"><img src="../assets/zh-Hans/06_rewards.jpg" alt="积分与奖励"></div>
+  <video class="hero-shot" src="../assets/promo_60s.mp4" poster="../assets/promo_poster.jpg" controls preload="none"></video>
+  <p class="small-note">免费试用 7 天 · 一次买断 · 无需注册、无广告 · 支持家庭共享</p>
+</section>
+
+<!-- Statement -->
+<div class="dark"><div>
+  <h2>孩子自己带节奏，<br>反而做得更好。</h2>
+  <p class="sub">LearnNest 把每天的例行事务，变成孩子主动想做的事。</p>
+</div></div>
+
+<!-- Features -->
+<section id="features">
+  <h2>一切，都在一个 App。</h2>
+  <div class="grid">
+    <div class="item"><span class="emoji">✅</span><h3>习惯打卡</h3><p>轻轻一点，连续天数和积分一起涨。</p></div>
+    <div class="item"><span class="emoji">📅</span><h3>课程表</h3><p>一周安排，抬眼可见，多设备同步。</p></div>
+    <div class="item"><span class="emoji">📚</span><h3>作业</h3><p>按科目清晰归类，一项都不漏。</p></div>
+    <div class="item"><span class="emoji">⭐</span><h3>积分奖励</h3><p>家长定规则，孩子挣积分、换奖励。</p></div>
+    <div class="item"><span class="emoji">🎯</span><h3>专注模式</h3><p>下一节课，直接显示在锁屏上。</p></div>
+    <div class="item"><span class="emoji">☁️</span><h3>iCloud 同步</h3><p>全家设备实时同步，数据只属于你。</p></div>
   </div>
-  <div class="videobox">
-    <video controls preload="none" poster="../assets/promo_poster.jpg" src="../assets/promo_60s.mp4"></video>
-    <p>▶ 60 秒功能总览（含中文旁白）</p>
+</section>
+
+<!-- How it works -->
+<div class="alt" id="how"><div>
+  <h2>十分钟，就能上手。</h2>
+  <div class="steps">
+    <div><div class="num">第一步</div><h3>建好家庭</h3><p>为每个孩子创建独立空间。</p></div>
+    <div><div class="num">第二步</div><h3>孩子自己跑一天</h3><p>打卡习惯、完成作业、查看课程。</p></div>
+    <div><div class="num">第三步</div><h3>坚持就有回报</h3><p>积分变成你们一起定义的奖励。</p></div>
   </div>
 </div></div>
 
-<section id="how"><div class="wrap">
-  <h2>三步上手，一个正向循环</h2>
-  <p class="lead">和孩子一起设置好，然后让动力替你催。</p>
-  <div class="steps">
-    <div class="step"><span class="icon">👨‍👩‍👧‍👦</span><span class="num">1</span><h3>建好家庭</h3><p>给每个孩子建一个学习空间，填好每周课程表，把这学期的作业和想养成的习惯一起录进去。</p></div>
-    <div class="step"><span class="icon">✅</span><span class="num">2</span><h3>孩子自己跑一天</h3><p>早上打开「今日一览」，课程、待办一屏掌握；放学后自己打勾作业、打卡习惯、开始专注计时。</p></div>
-    <div class="step"><span class="icon">🎁</span><span class="num">3</span><h3>坚持变成奖励</h3><p>打卡赚积分，攒够兑换你设置的奖品——一次电影夜、一支冰淇淋、一次郊游。连续天数和徽章让孩子一直想坚持。</p></div>
+<!-- A day -->
+<section>
+  <h2>孩子在 LearnNest 的一天。</h2>
+  <div class="day">
+    <figure><img src="../assets/zh-Hans/04_habits.jpg" alt="早晨习惯打卡"><figcaption><strong>7:20</strong> 上学前的习惯，自己就能打完卡。</figcaption></figure>
+    <figure><img src="../assets/zh-Hans/03_homework.jpg" alt="放学后作业清单"><figcaption><strong>16:30</strong> 作业按科目排好，晚饭前全部完成。</figcaption></figure>
+    <figure><img src="../assets/zh-Hans/06_rewards.jpg" alt="周末兑换奖励"><figcaption><strong>周六</strong> 一周的坚持，换来期待已久的奖励。</figcaption></figure>
   </div>
-</div></section>
+</section>
 
-<section id="features"><div class="wrap">
-  <h2>一个 App，搞定学习日常</h2>
-  <p class="lead">六大功能环环相扣：安排课程、记录作业、坚持习惯、保持专注，再用积分奖励形成正循环。</p>
-  <div class="grid">
-    <div class="feat"><img src="../assets/zh-Hans/01_today.jpg" alt="今日一览"><div><h3>今日一览</h3><p>今天的课程、待完成作业、习惯打卡和可兑换奖品，一屏全部掌握。</p></div></div>
-    <div class="feat"><img src="../assets/zh-Hans/02_timetable.jpg" alt="课程表"><div><h3>课程表</h3><p>周一到周日多课表，上午、下午与午休自由安排，节次时间随心定义。</p></div></div>
-    <div class="feat"><img src="../assets/zh-Hans/03_homework.jpg" alt="作业管理"><div><h3>作业管理</h3><p>按科目记录作业与截止日期，完成打勾，逾期一目了然。</p></div></div>
-    <div class="feat"><img src="../assets/zh-Hans/04_habits.jpg" alt="习惯养成"><div><h3>习惯养成</h3><p>每日打卡、连续天数与成就徽章，让好习惯看得见。</p></div></div>
-    <div class="feat"><img src="../assets/zh-Hans/05_focus.jpg" alt="专注计时"><div><h3>专注计时</h3><p>25/35/45 分钟或自定义时长，完成自动记录，培养专注力。</p></div></div>
-    <div class="feat"><img src="../assets/zh-Hans/06_rewards.jpg" alt="积分与奖励"><div><h3>积分与奖励</h3><p>完成任务赚积分，兑换家长设置的奖品，正向激励每日坚持。</p></div></div>
+<!-- Founder -->
+<div class="alt"><div>
+  <blockquote>“LearnNest 最初就是为我自己的两个孩子做的——从此早晨不再是战斗，谁也不用催谁。”</blockquote>
+  <footer>Frank，两个孩子的爸爸 · 独立开发者</footer>
+</div></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>常见问题。</h2>
+  <div style="margin-top:48px">
+    <details><summary>适合多大的孩子？</summary><p>6–14 岁效果最好。年龄小一点的孩子，可以在家长协助下使用。</p></details>
+    <details><summary>怎么收费？</summary><p>免费试用 7 天，之后一次性买断——无订阅、无广告。具体金额以 App Store 展示为准，支持家庭共享。</p></details>
+    <details><summary>需要注册账号吗？</summary><p>不需要。不注册、不收集数据，所有数据只通过你自己的 iCloud 同步。</p></details>
+    <details><summary>可以添加几个孩子？</summary><p>数量不限，每个孩子都有独立空间。</p></details>
+    <details><summary>支持哪些语言？</summary><p>21 种，包括简体中文、繁体中文、英语、日语、西班牙语、法语、德语、韩语等。</p></details>
+    <details><summary>有安卓版吗？</summary><p>目前优先做好 iOS，安卓版在规划中。</p></details>
   </div>
-</div></section>
+</section>
 
-<section id="journey" class="band"><div class="wrap">
-  <h2>孩子在 LearnNest 的一天</h2>
-  <p class="lead">从早上的兵荒马乱到睡前的积分兑换，它是这样融进日常的。</p>
-
-  <div class="jrow">
-    <img src="../assets/zh-Hans/02_timetable.jpg" alt="早晨：今日课程一览">
-    <div>
-      <div class="time">07:20 · 上学前</div>
-      <h3>不再追问「今天有什么课」</h3>
-      <p>早餐桌上打开 App，今天的课程、要带的东西、要交的作业一屏看完——出门前不再是五个问题，而是一次确认。</p>
-    </div>
+<!-- Final CTA -->
+<div class="dark" id="download"><div>
+  <h2>今晚花十分钟，<br>明早轻松一整天。</h2>
+  <div class="cta-row">
+    <a class="btn" href="https://apps.apple.com/app/learnnest" style="font-size:20px;padding:17px 40px">App Store 下载</a>
   </div>
+  <p class="sub" style="font-size:16px">免费试用 7 天 · 一次买断 · 支持家庭共享</p>
+</div></div>
 
-  <div class="jrow rev">
-    <img src="../assets/zh-Hans/04_habits.jpg" alt="放学后：作业与习惯打卡">
-    <div>
-      <div class="time">16:30 · 放学后</div>
-      <h3>打勾这件事，孩子自己主动做</h3>
-      <p>作业打勾、练琴打卡、阅读记录——每项打卡显示能赚的积分。连续天数在涨、徽章在解锁，而你没有催第二遍。</p>
-    </div>
-  </div>
-
-  <div class="jrow">
-    <img src="../assets/zh-Hans/06_rewards.jpg" alt="周末：积分兑换奖励">
-    <div>
-      <div class="time">周末 · 兑换时刻</div>
-      <h3>积分变成真实的快乐</h3>
-      <p>攒够积分换那次游乐园、那顿冰淇淋？孩子自己在 App 里兑换，奖品清单由你来定——动力体系长在你家的真实生活上。</p>
-    </div>
-  </div>
-</div></section>
-
-<section id="family"><div class="wrap">
-  <h2>为家庭而设计</h2>
-  <p class="lead">不只是记录工具，更是家长的管理台。</p>
-  <div class="hlgrid">
-    <div class="hl"><h3>☁️ iCloud 家庭共享</h3><p>父母双方 App 实时同步，共同管理课表与奖励，还能邀请祖辈一起查看。</p></div>
-    <div class="hl"><h3>👨‍👩‍👧‍👦 多个学习空间</h3><p>每个空间独立的课程表、作业、习惯和积分，切换即看，互不干扰。</p></div>
-    <div class="hl"><h3>🌍 22 种语言</h3><p>English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Português · Français · Deutsch 等 22 种。</p></div>
-    <div class="hl"><h3>🔒 设备锁（PIN）</h3><p>PIN 码保护配置页面，设备交到别人手里也只能看不能改。</p></div>
-    <div class="hl"><h3>🛡️ 隐私优先</h3><p>无账号、无服务器、无广告追踪。所有数据只存在你自己的 iCloud 私人数据库里。</p></div>
-    <div class="hl"><h3>📴 离线可用</h3><p>没有网络也能正常查看课程表、记录作业与打卡，联网后自动同步。</p></div>
-  </div>
-</div></section>
-
-<section id="who" class="band"><div class="wrap">
-  <h2>谁适合用</h2>
-  <p class="lead">有上学孩子的家庭都适用——这四类家庭用它最顺手。</p>
-  <div class="who-grid">
-    <div class="who"><span class="icon">💼</span><h3>忙碌的双职工家庭</h3><p>开学时把一天的结构设好，之后 App 替你保持全员同步——少喊几遍「该出门了」，少漏几件事。</p></div>
-    <div class="who"><span class="icon">🧒🧒</span><h3>二胎三胎家庭</h3><p>每个孩子独立学习空间，各自的课表、作业、习惯和积分，一键切换，绝不串门。</p></div>
-    <div class="who"><span class="icon">👀</span><h3>需要视觉化日程的孩子</h3><p>清晰的视觉化日程帮助依赖确定性的孩子——这也是很多 ADHD 孩子的家长青睐视觉化日程工具的原因。</p></div>
-    <div class="who"><span class="icon">🏠</span><h3>家庭教育与课后安排</h3><p>自定义节次和灵活周课表，既适合普通上学周，也适合在家上学、课后兴趣班和周末训练。</p></div>
-  </div>
-</div></section>
-
-<section id="compare"><div class="wrap">
-  <h2>为什么一次买断比墙上的贴纸表更值</h2>
-  <p class="lead">一张诚实的对比表——纸质贴纸表和订阅制 App 各有取舍，这是我们的答案。</p>
-  <div class="cmp">
-    <table>
-      <tr><th></th><th class="hlcol">LearnNest</th><th>纸质贴纸表</th><th>订阅制习惯 App</th></tr>
-      <tr><td>费用模式</td><td><span class="yes">一次买断，永久使用</span></td><td>打印纸和贴纸，持续开销</td><td>按月付费，永远交</td></tr>
-      <tr><td>家庭数据在哪</td><td><span class="yes">只在你自己的 iCloud</span></td><td>贴在墙上</td><td>常在厂商服务器上</td></tr>
-      <tr><td>广告与追踪</td><td><span class="yes">无</span></td><td>无</td><td>不一——免费增值类常带广告</td></tr>
-      <tr><td>离线可用</td><td><span class="yes">是</span></td><td>是</td><td>不一</td></tr>
-      <tr><td>语言</td><td><span class="yes">22 种</span></td><td>一种</td><td>不一</td></tr>
-      <tr><td>积分奖励体系</td><td><span class="yes">内置，家长自定义</span></td><td>手工贴纸</td><td>不一</td></tr>
-      <tr><td>孩子自己的设备</td><td><span class="yes">支持，PIN 锁保护设置</span></td><td>不适用</td><td>不一</td></tr>
-    </table>
-  </div>
-</div></section>
-
-<section id="pricing"><div class="wrap">
-  <h2>简单透明的价格</h2>
-  <p class="lead">全功能免费试用 7 天，一次买断永久使用——绝不订阅。</p>
-  <div class="price-cards">
-    <div class="price-card">
-      <h3>免费试用</h3>
-      <div class="big">7 天</div>
-      <div class="fine">全功能开放</div>
-      <ul>
-        <li>六大功能全部可用，无阉割</li>
-        <li>无需注册，无需绑定支付方式</li>
-        <li>试用结束，数据依然保留</li>
-      </ul>
-    </div>
-    <div class="price-card hot">
-      <span class="tag">一次性买断</span>
-      <h3>永久解锁</h3>
-      <div class="big">一次付费</div>
-      <div class="fine">价格以你所在地区的 App Store 展示为准</div>
-      <ul>
-        <li>全部功能 + 后续所有更新</li>
-        <li>无订阅、无自动续费</li>
-        <li>支持家庭共享——一次购买全家使用</li>
-      </ul>
-    </div>
-  </div>
-</div></section>
-
-<section id="story" class="band"><div class="wrap">
-  <h2>爸爸做的 App，给所有家庭</h2>
-  <div class="founder">
-    <img src="../assets/appicon.png" alt="LearnNest 图标">
-    <div>
-      <p>"你好，我是 Frank，做 LearnNest 的爸爸。我有两个孩子，这个 App 最初就是我们家自己的学习管理工具：早餐桌上看的课程表、放学后的作业清单、睡前的习惯打卡、儿子攒积分换的奖励。在自己家跑通之后，我把它打磨成正式产品，让更多家庭也能用上。</p>
-      <p>这也是它没有订阅的原因——我不想用月费把功能扣在手里。一次诚实的买断，之后每次更新都免费。而且因为这是给我自己孩子做的产品，关于他们的任何数据，除了我们自家的 iCloud，不存在任何别的地方。"</p>
-      <p class="sig">— Frank，开发者 · 两个孩子的爸爸</p>
-    </div>
-  </div>
-</div></section>
-
-<section id="whatsnew"><div class="wrap">
-  <h2>更新日志</h2>
-  <p class="lead">持续迭代——已购家庭所有更新永久免费。</p>
-  <div class="log">
-    <div class="ver"><h3>1.0.4 <span class="latest">最新版</span></h3>
-      <ul>
-        <li>打卡积分徽章——打卡可得积分（+N 分）直接显示，孩子动力看得见</li>
-        <li>新增泰语支持，现共 22 种语言</li>
-        <li>适配 iPhone Duo 双屏形态</li>
-        <li>修复 iPad 课程表小组件与习惯徽章墙显示不全</li>
-      </ul>
-    </div>
-    <div class="ver"><h3>1.0.3</h3>
-      <ul><li>自定义打卡奖励——家长可给每个习惯设定积分分值</li></ul>
-    </div>
-    <div class="ver"><h3>1.0.2</h3>
-      <ul><li>App Store 正式发布</li></ul>
-    </div>
-  </div>
-</div></section>
-
-<section id="faq"><div class="wrap">
-  <h2>常见问题</h2>
-  <p class="lead">关于数据、账号与购买，你想知道的都在这里。</p>
-  <dl class="faq">
-    <details open><summary>学习数据存在哪里？安全吗？</summary><p>全部数据只保存在你自己的 iCloud 私人数据库（Apple CloudKit）中，开发者无法读取或导出；App 没有账号系统，也没有第三方统计或广告 SDK。</p></details>
-    <details><summary>需要注册账号吗？</summary><p>不需要。下载后直接使用，登录你的 iCloud 即可自动同步与家庭共享。</p></details>
-    <details><summary>免费试用是怎么样的？</summary><p>下载即可免费使用全部功能 7 天；试用结束后需一次性买断解锁，无订阅、无内购陷阱。</p></details>
-    <details><summary>适合多大的孩子？</summary><p>适合能自己完成打勾操作的学龄段孩子，大约 6-14 岁。课程表、作业和奖励由家长设置；低龄孩子初期可能需要搭把手，大孩子完全可以自己管理。</p></details>
-    <details><summary>家里不止一个孩子怎么用？</summary><p>每个孩子一个独立学习空间，各自的课表、作业、习惯和积分完全独立，一键切换；一次买断支持家庭共享，全部孩子都覆盖。</p></details>
-    <details><summary>支持哪些设备？</summary><p>支持 iPhone 与 iPad，界面针对两种尺寸分别适配；数据通过 iCloud 在多台设备间同步。</p></details>
-    <details><summary>有我的语言吗？</summary><p>有——LearnNest 支持 22 种语言，包括简体中文、繁體中文、English、日本語、한국어、Español、Français、Deutsch、Русский 等。</p></details>
-    <details><summary>没有网络能用吗？</summary><p>能。课程表查看、作业记录、习惯打卡全部离线可用，联网后通过 iCloud 自动同步。</p></details>
-    <details><summary>有 Android 版吗？</summary><p>目前没有——LearnNest 是 iOS 优先（iPhone 与 iPad）。如果你家以 Android 为主，欢迎通过页脚邮箱告诉我们，你们的声音直接影响我们的下一步计划。</p></details>
-  </dl>
-</div></section>
-
-<div class="finalcta">
-  <div class="wrap">
-    <h2>今晚花十分钟，明早轻松一整天</h2>
-    <p>睡前建好家庭和学习空间，明天让孩子自己跑起来。</p>
-    <div class="cta-row">
-      <!-- TODO(deploy): 替换为 ASC 实际 App 页 URL -->
-      <a class="cta" href="https://apps.apple.com/">App Store 立即下载</a>
-    </div>
-    <p class="trialnote">7 天免费试用 · 无需注册 · 无需绑卡 · 试用后一次性买断</p>
-  </div>
-</div>
-
-<footer><div class="wrap">
-  <div class="cols">
-    <div>
-      <h4>产品</h4>
-      <a href="#how">怎么用</a>
-      <a href="#features">功能</a>
-      <a href="#pricing">价格</a>
-      <a href="#whatsnew">更新日志</a>
-    </div>
-    <div>
-      <h4>支持</h4>
-      <a href="https://4gk5msrpwv-cpu.github.io/privacy-pages/zh-Hans/">隐私政策</a>
-      <a href="mailto:Your.LearnNest@outlook.com">Your.LearnNest@outlook.com</a>
-    </div>
-    <div>
-      <h4>语言</h4>
-      <a href="/">English</a>
-      <a href="/zh-Hans/">简体中文</a>
-    </div>
-  </div>
-  <div>© 2026 LearnNest · 用心做的学习管理 App</div>
+<footer class="site"><div class="inner">
+  <span>© 2026 LearnNest. All rights reserved.</span>
+  <span><a href="https://4gk5msrpwv-cpu.github.io/privacy-pages/zh-Hans/">隐私政策</a> · <a href="https://4gk5msrpwv-cpu.github.io/privacy-pages/support/">支持</a> · <a href="https://4gk5msrpwv-cpu.github.io/privacy-pages/terms">条款</a></span>
+  <span><a href="/">English</a></span>
 </div></footer>
 
 </body>
